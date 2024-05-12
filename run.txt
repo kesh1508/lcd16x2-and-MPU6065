@@ -1,0 +1,19 @@
+###running without connecting with the device###
+sudo nano /etc/systemd/system/motion_detection.service
+In the file, add the following content:
+[Unit]
+Description=Motion Detection Script
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python3 /path/to/your/script.py
+
+[Install]
+WantedBy=multi-user.target
+After creating the service file, reload the systemd manager configuration to update changes:
+sudo systemctl daemon-reload
+sudo systemctl enable motion_detection.service
+sudo reboot
+sudo systemctl status motion_detection.service
+sudo systemctl stop motion_detection.service
